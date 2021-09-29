@@ -6,7 +6,7 @@ resource "aws_lambda_function" "slack_lambda" {
 
   source_code_hash = data.archive_file.file.output_base64sha256
   runtime = var.runtime
-
+  timeout = var.timeout
   environment {
     variables = {
       kmsEncryptedHookUrl = var.slack_url

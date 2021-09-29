@@ -161,7 +161,7 @@ variable "opsgenie_url" {
 
 #Lambda
 variable "lambda_handler" { 
-    description = ""
+    description = "The method used to execute your function. consists of file name and function name."
     default = "slack_alert.lambda_handler"
 } 
 
@@ -179,7 +179,7 @@ variable "slack_channel" {
     default = ""
 } 
 
-variable "source_file" { 
-    description = ""
-    default = "" 
+variable "timeout" { 
+    description = "the lambda functions timeout in seconds"
+    default = "60" 
 } 
