@@ -146,6 +146,11 @@ variable "storage_threshold" {
     default = "20480" 
 }
 
+variable "alert_type" {
+    description = "the type of alert, to differ between warning/critical alerts"
+    default = ""
+}
+
 #SNS
 variable "email_address" { 
     description = "The email address to alert when a cloudwatch alarm is triggered."
