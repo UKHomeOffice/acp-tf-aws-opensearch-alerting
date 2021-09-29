@@ -18,9 +18,9 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.kinesis_stream_name}-kinesis-read-throughput"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = var.read_throughput_evaluation_periods
-  metric_name               = "ReadProvisionedThroughputExceeded."
+  metric_name               = "ReadProvisionedThroughputExceeded"
   namespace                 = "AWS/Kinesis"
   period                    = var.read_throughput_period 
   statistic                 = "Average"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.kinesis_stream_name}-kinesis-write-throughput"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = var.write_throughput_evaluation_periods
   metric_name               = "WriteProvisionedThroughputExceeded"
   namespace                 = "AWS/Kinesis"
@@ -160,7 +160,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   namespace                 = "AWS/ES"
   period                    = "60"
   statistic                 = "Average"
-  threshold                 = var.storage_threshold # this should be around 25% of the storage space available per node
+  threshold                 = lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
   alarm_description         = "Alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {

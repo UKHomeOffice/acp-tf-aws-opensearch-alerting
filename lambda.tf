@@ -18,6 +18,14 @@ resource "aws_lambda_function" "slack_lambda" {
   ]
 }
 
+resource "aws_lambda_permission" "lambda_sns" {
+  statement_id  = "AllowExecutionFromSNS"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.slack_lambda.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.slack.arn
+}
+
 data "archive_file" "file" {
   type        = "zip"
   source_file = "${path.module}/slack_alert.py"

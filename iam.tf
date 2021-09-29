@@ -3,7 +3,7 @@ resource "aws_iam_role" "lambda_role" {
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
   inline_policy {
-    name = "kms-descrypt"
+    name = "kms-decrypt"
     policy = data.aws_iam_policy_document.lambda_kms_policy.json
   }  
 }

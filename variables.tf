@@ -60,6 +60,11 @@ variable "opensearch_domain" {
     default = "" 
 } 
 
+variable "opensearch_instance" { 
+    description = "The opensearch instance type, used for determining the threshold for the storage alarm."   
+    default = "" 
+} 
+
 
 variable "cpu_utilization_evaluation_periods" { 
     description = "Number of periods to compare against the opensearch cluster cpu utilization threshold."
