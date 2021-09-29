@@ -63,6 +63,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_yellow" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -80,6 +81,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_red" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -97,6 +99,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -114,6 +117,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -131,6 +135,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -148,6 +153,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -160,11 +166,12 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   namespace                 = "AWS/ES"
   period                    = "60"
   statistic                 = "Average"
-  threshold                 = lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
+  threshold                 = 0.25*lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
   alarm_description         = "Alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -182,6 +189,7 @@ resource "aws_cloudwatch_metric_alarm" "unreachable_nodes" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -199,6 +207,7 @@ resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
 
@@ -216,5 +225,6 @@ resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
   alarm_actions             = [aws_sns_topic.slack.arn, aws_sns_topic.opsgenie.arn, aws_sns_topic.email.arn]
   dimensions = {
     DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
   }
 }
