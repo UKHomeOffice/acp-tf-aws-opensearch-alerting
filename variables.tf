@@ -1,3 +1,12 @@
+variable "alert_level" {
+    description = "The level to identify the severity of the alarm E.g Warning, critical, severe"
+    default = "warning" 
+}
+
+variable "alarm_actions" {
+  description = "The actions for the alarm to take when in an alarm state"
+  default = []
+}
 
 # Kinesis
 variable "kinesis_alarms_required" {
@@ -8,6 +17,7 @@ variable "kinesis_stream_name" {
     description = "Name of the kinesis stream to monitor."
     default = "acp-log-stream" 
 }
+
 variable "get_iterator_period" { 
     description = "Period that the statistic is applied against the get iterator age metric."
     default = "300" 
@@ -141,50 +151,7 @@ variable "unreachable_node_threshold" {
     default = "3" 
 }
 
-variable "storage_threshold" { 
-    description = "The opensearch cluster storage available threshold."
-    default = "20480" 
+variable "storage_percentage" { 
+    description = "The value used to workout the percentage of the threshold."
+    default = 0.25 
 }
-
-variable "alert_type" {
-    description = "the type of alert, to differ between warning/critical alerts"
-    default = ""
-}
-
-#SNS
-variable "email_address" { 
-    description = "The email address to alert when a cloudwatch alarm is triggered."
-    default = "test@test.com"
-}
-
-
-variable "opsgenie_url" {
-    description = "The opsgenie url endpoint for the sns topic subscription."
-    default = ""
-} 
-
-
-#Lambda
-variable "lambda_handler" { 
-    description = "The method used to execute your function. consists of file name and function name."
-    default = "slack_alert.lambda_handler"
-} 
-
-variable "runtime" { 
-    description = "The runtime engine of the lambda function."
-    default = "python3.8" 
-} 
-
-variable "slack_url" {
-    description = "The slack URL to set as an environment variable within the lambda function."
-    default = ""
-} 
-variable "slack_channel" {
-    description = "The slack channel to set as an environment variable within the lambda function."
-    default = ""
-} 
-
-variable "timeout" { 
-    description = "the lambda functions timeout in seconds"
-    default = "60" 
-} 
