@@ -158,7 +158,7 @@ variable "storage_percentage" {
 
 variable "get_records_success_evaluation_periods" {
     description = "Number of periods to compare against the get records success threshold."
-    default = "2"
+    default = "3"
 }
 
 variable "get_records_success_period" {
@@ -168,12 +168,12 @@ variable "get_records_success_period" {
 
 variable "get_records_success_threshold" {
     description = "Threshold for the get records success "
-    default = "1800000"
+    default = "1"
 }
 
 variable "put_records_success_evaluation_periods" {
     description = "Number of periods to compare against the put records success threshold."
-    default = "2"
+    default = "3"
 }
 
 variable "put_records_success_period" {
@@ -183,5 +183,5 @@ variable "put_records_success_period" {
 
 variable "put_records_success_threshold" {
     description = "Threshold for the put records success"
-    default = "1800000"
+    default = "100"
 }

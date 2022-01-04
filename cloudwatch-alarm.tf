@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-get-record-success"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   metric_name               = "GetRecords.Success"
   namespace                 = "AWS/Kinesis"
   statistic                 = "Average"
@@ -18,7 +18,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-put-record-success"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   metric_name               = "PutRecords.Success"
   namespace                 = "AWS/Kinesis"
   statistic                 = "Average"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-iterator-age"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.get_iterator_evaluation_periods
   metric_name               = "GetRecords.IteratorAgeMilliseconds"
   namespace                 = "AWS/Kinesis"
@@ -52,7 +52,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-read-throughput"
-  comparison_operator       = "GreaterThanThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.read_throughput_evaluation_periods
   metric_name               = "ReadProvisionedThroughputExceeded"
   namespace                 = "AWS/Kinesis"
@@ -69,7 +69,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-write-throughput"
-  comparison_operator       = "GreaterThanThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.write_throughput_evaluation_periods
   metric_name               = "WriteProvisionedThroughputExceeded"
   namespace                 = "AWS/Kinesis"
@@ -86,7 +86,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
 resource "aws_cloudwatch_metric_alarm" "cluster_yellow" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "warning-${var.opensearch_domain}-opensearch-cluster-yellow"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = "1"
   metric_name               = "ClusterStatus.yellow"
   namespace                 = "AWS/ES"
@@ -104,7 +104,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_yellow" {
 resource "aws_cloudwatch_metric_alarm" "cluster_red" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "critical-${var.opensearch_domain}-opensearch-cluster-red"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = "1"
   metric_name               = "ClusterStatus.red"
   namespace                 = "AWS/ES"
@@ -122,7 +122,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_red" {
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.opensearch_domain}-opensearch-cpu-utlization"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.cpu_utilization_evaluation_periods
   metric_name               = "CPUUtilization"
   namespace                 = "AWS/ES"
@@ -140,7 +140,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
 resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.opensearch_domain}-opensearch-jvm-pressure"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.jvm_evaluation_periods
   metric_name               = "JVMMemoryPressure"
   namespace                 = "AWS/ES"
@@ -158,7 +158,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
 resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.opensearch_domain}-opensearch-master-cpu-utlization"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.master_cpu_utilization_evaluation_periods
   metric_name               = "MasterCPUUtilization"
   namespace                 = "AWS/ES"
@@ -176,7 +176,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
 resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.opensearch_domain}-opensearch-master-jvm-pressure"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = var.master_jvm_evaluation_periods
   metric_name               = "MasterJVMMemoryPressure"
   namespace                 = "AWS/ES"
@@ -248,7 +248,7 @@ resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
 resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
   count                     = var.opensearch_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.opensearch_domain}-opensearch-automated-snapshot"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   evaluation_periods        = "1"
   metric_name               = "AutomatedSnapshotFailure"
   namespace                 = "AWS/ES"
