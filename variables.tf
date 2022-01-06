@@ -44,7 +44,7 @@ variable "read_throughput_period" {
 }
 variable "read_throughput_threshold" {
     description = "The read throughput threshold for the statistic to be compared against."
-    default = "0"
+    default = "0.5"
 }
 variable "write_throughput_evaluation_periods" {
     description = "Number of periods to compare against the write throughput threshold."
