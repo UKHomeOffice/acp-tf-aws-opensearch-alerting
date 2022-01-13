@@ -18,7 +18,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
 resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   count                     = var.kinesis_alarms_required ? 1 : 0
   alarm_name                = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-put-record-success"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "LessThanOrEqualToThreshold"
   metric_name               = "PutRecords.Success"
   namespace                 = "AWS/Kinesis"
   statistic                 = "Average"
