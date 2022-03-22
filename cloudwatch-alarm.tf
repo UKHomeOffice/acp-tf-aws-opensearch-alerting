@@ -270,7 +270,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_blocking_writes" {
   evaluation_periods  = "1"
   metric_name         = "ClusterIndexWritesBlocked"
   namespace           = "AWS/ES"
-  period              = "5000"
+  period              = "3600"
   statistic           = "Maximum"
   threshold           = "1"
   alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
