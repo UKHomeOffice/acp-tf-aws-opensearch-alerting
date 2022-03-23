@@ -8,7 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
   evaluation_periods  = var.get_records_success_evaluation_periods
   period              = var.get_records_success_period
   threshold           = var.get_records_success_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the kinesis successful GetRecords operations for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the kinesis successful GetRecords operations for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -25,7 +25,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   evaluation_periods  = var.put_records_success_evaluation_periods
   period              = var.put_records_success_period
   threshold           = var.put_records_success_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the kinesis successful PutRecords operations for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the kinesis successful PutRecords operations for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -42,7 +42,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
   period              = var.get_iterator_period
   statistic           = "Average"
   threshold           = var.get_iterator_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
   period              = var.read_throughput_period
   statistic           = "Average"
   threshold           = var.read_throughput_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -76,7 +76,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   period              = var.write_throughput_period
   statistic           = "Average"
   threshold           = var.write_throughput_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -93,7 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_yellow" {
   period              = var.cluster_yellow_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The warning alarm to monitor the AWS Opensearch cluster status is yellow for ${var.opensearch_domain}"
+  alarm_description   = "The ${var.environment} environment warning alarm to monitor the AWS Opensearch cluster status is yellow for ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -111,7 +111,7 @@ resource "aws_cloudwatch_metric_alarm" "cluster_red" {
   period              = var.cluster_red_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The warning alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
+  alarm_description   = "The ${var.environment} environment warning alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -129,7 +129,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_cluster_red" {
   period              = var.critical_cluster_red_period
   statistic           = "Minimum"
   threshold           = "1"
-  alarm_description   = "The critical alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
+  alarm_description   = "The ${var.environment} environment critical alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -147,7 +147,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   period              = var.cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.cpu_utilization_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.cpu_utilization_threshold}%"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.cpu_utilization_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -165,7 +165,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   period              = var.jvm_period
   statistic           = "Maximum"
   threshold           = var.jvm_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster jvm pressure is not above ${var.jvm_threshold}%"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster jvm pressure is not above ${var.jvm_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -183,7 +183,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   period              = var.master_cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.master_cpu_utilization_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_cpu_utilization_threshold}%"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_cpu_utilization_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -201,7 +201,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   period              = var.master_jvm_period
   statistic           = "Maximum"
   threshold           = var.master_jvm_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_jvm_threshold}%"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_jvm_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -219,7 +219,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   period              = "60"
   statistic           = "Average"
   threshold           = var.storage_percentage * lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
-  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -237,7 +237,7 @@ resource "aws_cloudwatch_metric_alarm" "unreachable_nodes" {
   period              = var.unreachable_node_period
   statistic           = "Minimum"
   threshold           = var.unreachable_node_threshold
-  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch cluster nodes become unreachable."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch cluster nodes become unreachable."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -255,7 +255,7 @@ resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
   period              = var.blocking_writes_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -273,7 +273,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_blocking_writes" {
   period              = var.critical_blocking_writes_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -291,7 +291,7 @@ resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -310,7 +310,7 @@ resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyError" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyError failure."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyError failure."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -328,7 +328,7 @@ resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyInaccessible" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The  alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyInaccessible failure."
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyInaccessible failure."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
