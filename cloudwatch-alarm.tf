@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-get-record-success"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-kinesis-get-record-success"
   comparison_operator = "LessThanOrEqualToThreshold"
   metric_name         = "GetRecords.Success"
   namespace           = "AWS/Kinesis"
@@ -8,7 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
   evaluation_periods  = var.get_records_success_evaluation_periods
   period              = var.get_records_success_period
   threshold           = var.get_records_success_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the kinesis successful GetRecords operations for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} alarm to monitor the kinesis successful GetRecords operations for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -17,7 +17,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
 
 resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-put-record-success"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-kinesis-put-record-success"
   comparison_operator = "LessThanOrEqualToThreshold"
   metric_name         = "PutRecords.Success"
   namespace           = "AWS/Kinesis"
@@ -25,7 +25,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   evaluation_periods  = var.put_records_success_evaluation_periods
   period              = var.put_records_success_period
   threshold           = var.put_records_success_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the kinesis successful PutRecords operations for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} alarm to monitor the kinesis successful PutRecords operations for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -34,7 +34,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
 
 resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-iterator-age"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-kinesis-iterator-age"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.get_iterator_evaluation_periods
   metric_name         = "GetRecords.IteratorAgeMilliseconds"
@@ -42,7 +42,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
   period              = var.get_iterator_period
   statistic           = "Average"
   threshold           = var.get_iterator_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -51,7 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
 
 resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-read-throughput"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-kinesis-read-throughput"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.read_throughput_evaluation_periods
   metric_name         = "ReadProvisionedThroughputExceeded"
@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
   period              = var.read_throughput_period
   statistic           = "Average"
   threshold           = var.read_throughput_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -68,7 +68,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_read_throughput" {
 
 resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.kinesis_stream_name}-kinesis-write-throughput"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-kinesis-write-throughput"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.write_throughput_evaluation_periods
   metric_name         = "WriteProvisionedThroughputExceeded"
@@ -76,7 +76,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   period              = var.write_throughput_period
   statistic           = "Average"
   threshold           = var.write_throughput_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
+  alarm_description   = "The ${var.environment} alarm to monitor the kinesis get iterator age metric for ${var.kinesis_stream_name}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -87,10 +87,10 @@ resource "aws_cloudwatch_metric_alarm" "cluster_yellow" {
   count               = var.opensearch_alarms_required ? 1 : 0
   alarm_name          = "warning-${var.opensearch_domain}-opensearch-cluster-yellow"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "3"
+  evaluation_periods  = var.cluster_yellow_evaluation_periods
   metric_name         = "ClusterStatus.yellow"
   namespace           = "AWS/ES"
-  period              = "600"
+  period              = var.cluster_yellow_period
   statistic           = "Maximum"
   threshold           = "1"
   alarm_description   = "The warning alarm to monitor the AWS Opensearch cluster status is yellow for ${var.opensearch_domain}"
@@ -105,10 +105,10 @@ resource "aws_cloudwatch_metric_alarm" "cluster_red" {
   count               = var.opensearch_alarms_required ? 1 : 0
   alarm_name          = "warning-${var.opensearch_domain}-opensearch-cluster-red"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "3"
+  evaluation_periods  = var.cluster_red_evaluation_periods
   metric_name         = "ClusterStatus.red"
   namespace           = "AWS/ES"
-  period              = "600"
+  period              = var.cluster_red_period
   statistic           = "Maximum"
   threshold           = "1"
   alarm_description   = "The warning alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
@@ -123,10 +123,10 @@ resource "aws_cloudwatch_metric_alarm" "critical_cluster_red" {
   count               = var.opensearch_alarms_required ? 1 : 0
   alarm_name          = "critical-${var.opensearch_domain}-opensearch-cluster-red"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "6"
+  evaluation_periods  = var.critical_cluster_red_evaluation_periods
   metric_name         = "ClusterStatus.red"
   namespace           = "AWS/ES"
-  period              = "600"
+  period              = var.critical_cluster_red_period
   statistic           = "Minimum"
   threshold           = "1"
   alarm_description   = "The critical alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}"
@@ -139,7 +139,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_cluster_red" {
 
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-cpu-utlization"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-cpu-utlization"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.cpu_utilization_evaluation_periods
   metric_name         = "CPUUtilization"
@@ -147,7 +147,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   period              = var.cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.cpu_utilization_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.cpu_utilization_threshold}%"
+  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.cpu_utilization_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -157,7 +157,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
 
 resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-jvm-pressure"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-jvm-pressure"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.jvm_evaluation_periods
   metric_name         = "JVMMemoryPressure"
@@ -165,7 +165,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   period              = var.jvm_period
   statistic           = "Maximum"
   threshold           = var.jvm_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster jvm pressure is not above ${var.jvm_threshold}%"
+  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster jvm pressure is not above ${var.jvm_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -175,7 +175,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
 
 resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-master-cpu-utlization"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-master-cpu-utlization"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.master_cpu_utilization_evaluation_periods
   metric_name         = "MasterCPUUtilization"
@@ -183,7 +183,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   period              = var.master_cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.master_cpu_utilization_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_cpu_utilization_threshold}%"
+  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_cpu_utilization_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -193,7 +193,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
 
 resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-master-jvm-pressure"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-master-jvm-pressure"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.master_jvm_evaluation_periods
   metric_name         = "MasterJVMMemoryPressure"
@@ -201,7 +201,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   period              = var.master_jvm_period
   statistic           = "Maximum"
   threshold           = var.master_jvm_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_jvm_threshold}%"
+  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_jvm_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -211,7 +211,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
 
 resource "aws_cloudwatch_metric_alarm" "storage_space" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-storage-available"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-storage-available"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = "2"
   metric_name         = "FreeStorageSpace"
@@ -219,7 +219,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   period              = "60"
   statistic           = "Average"
   threshold           = var.storage_percentage * lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
-  alarm_description   = "The ${var.alert_level} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
+  alarm_description   = "The ${var.environment} alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -229,7 +229,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
 
 resource "aws_cloudwatch_metric_alarm" "unreachable_nodes" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-nodes-unreachable"
+  alarm_name          = "critical-${var.environment}-${var.opensearch_domain}-opensearch-nodes-unreachable"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = var.unreachable_node_evaluation_periods
   metric_name         = "Nodes"
@@ -237,7 +237,7 @@ resource "aws_cloudwatch_metric_alarm" "unreachable_nodes" {
   period              = var.unreachable_node_period
   statistic           = "Minimum"
   threshold           = var.unreachable_node_threshold
-  alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch cluster nodes become unreachable."
+  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch cluster nodes become unreachable."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -247,15 +247,15 @@ resource "aws_cloudwatch_metric_alarm" "unreachable_nodes" {
 
 resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-index-writes-blocked"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-index-writes-blocked"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "1"
+  evaluation_periods  = var.blocking_writes_evaluation_periods
   metric_name         = "ClusterIndexWritesBlocked"
   namespace           = "AWS/ES"
-  period              = "300"
+  period              = var.blocking_writes_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -265,15 +265,15 @@ resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
 
 resource "aws_cloudwatch_metric_alarm" "critical_blocking_writes" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-index-writes-blocked-critical"
+  alarm_name          = "critical-${var.environment}-${var.opensearch_domain}-opensearch-index-writes-blocked-critical"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "1"
+  evaluation_periods  = var.critical_blocking_writes_evaluation_periods
   metric_name         = "ClusterIndexWritesBlocked"
   namespace           = "AWS/ES"
-  period              = "3600"
+  period              = var.critical_blocking_writes_period
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -283,7 +283,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_blocking_writes" {
 
 resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "${var.alert_level}-${var.opensearch_domain}-opensearch-automated-snapshot"
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-automated-snapshot"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
   metric_name         = "AutomatedSnapshotFailure"
@@ -291,7 +291,7 @@ resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
+  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch automated snapshot fails."
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -302,7 +302,7 @@ resource "aws_cloudwatch_metric_alarm" "automated_snapshot" {
 
 resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyError" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "critical-${var.opensearch_domain}-opensearch-KMSKeyError"
+  alarm_name          = "critical-${var.environment}-${var.opensearch_domain}-opensearch-KMSKeyError"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
   metric_name         = "KMSKeyError"
@@ -310,7 +310,7 @@ resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyError" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "1"
-  alarm_description   = "The ${var.alert_level} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyError failure."
+  alarm_description   = "The ${var.environment} alarm to monitor if the ${var.opensearch_domain} AWS Opensearch KMSKeyError failure."
   alarm_actions       = var.critical_alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -320,7 +320,7 @@ resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyError" {
 
 resource "aws_cloudwatch_metric_alarm" "opensearch_KMSKeyInaccessible" {
   count               = var.opensearch_alarms_required ? 1 : 0
-  alarm_name          = "critical-${var.opensearch_domain}-opensearch-KMSKeyInaccessible"
+  alarm_name          = "critical-${var.environment}-${var.opensearch_domain}-opensearch-KMSKeyInaccessible"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
   metric_name         = "KMSKeyInaccessible"

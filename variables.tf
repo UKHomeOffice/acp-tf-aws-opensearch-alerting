@@ -1,6 +1,5 @@
-variable "alert_level" {
-  description = "The level to identify the severity of the alarm E.g Warning, critical, severe"
-  default     = "warning"
+variable "environment" {
+  description = "The environment it is in, which is suffixed to the alarm"
 }
 
 variable "alarm_actions" {
@@ -80,6 +79,36 @@ variable "opensearch_instance" {
   default     = ""
 }
 
+variable "cluster_yellow_evaluation_periods" {
+  description = "Number of periods to compare against the threshold"
+  default     = "6"
+}
+
+variable "cluster_yellow_period" {
+  description = "Period size for statistic to applied against"
+  default     = "300"
+}
+
+variable "cluster_red_evaluation_periods" {
+  description = "Number of periods to compare against the threshold"
+  default     = "6"
+}
+
+variable "cluster_red_period" {
+  description = "Period size for statistic to applied against"
+  default     = "300"
+}
+
+
+variable "critical_cluster_red_evaluation_periods" {
+  description = "Number of periods to compare against the threshold"
+  default     = "12"
+}
+
+variable "critical_cluster_red_period" {
+  description = "Period size for statistic to applied against"
+  default     = "300"
+}
 
 variable "cpu_utilization_evaluation_periods" {
   description = "Number of periods to compare against the opensearch cluster cpu utilization threshold."
@@ -154,6 +183,26 @@ variable "unreachable_node_period" {
 variable "unreachable_node_threshold" {
   description = "The opensearch cluster unreachable node threshold."
   default     = "3"
+}
+
+variable "blocking_writes_evaluation_periods" {
+  description = "Number of periods to compare against, the master jvm threshold."
+  default     = "15"
+}
+
+variable "blocking_writes_period" {
+  description = "Period that the statistic is applied, against the opensearch cluster unreachable node threshold."
+  default     = "60"
+}
+
+variable "critical_blocking_writes_evaluation_periods" {
+  description = "Number of periods to compare against."
+  default     = "30"
+}
+
+variable "critical_blocking_writes_period" {
+  description = "Period that the statistic is applied."
+  default     = "60"
 }
 
 variable "storage_percentage" {
