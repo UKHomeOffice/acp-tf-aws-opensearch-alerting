@@ -38,7 +38,7 @@ variable "get_iterator_threshold" {
 }
 
 variable "read_throughput_evaluation_periods" {
-  description = "Number of periods to com pare against the read throughput threshold."
+  description = "Number of periods to compare against the read throughput threshold."
   default     = "3"
 }
 
@@ -112,6 +112,15 @@ variable "cluster_red_period" {
   default     = "300"
 }
 
+variable "critical_cluster_red_evaluation_periods" {
+  description = "Number of periods to compare against the threshold"
+  default     = "12"
+}
+
+variable "critical_cluster_red_period" {
+  description = "Period size for statistic to applied against"
+  default     = "300"
+}
 
 variable "critical_cluster_red_evaluation_periods" {
   description = "Number of periods to compare against the threshold"
