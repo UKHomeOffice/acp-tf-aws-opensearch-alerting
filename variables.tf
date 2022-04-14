@@ -122,16 +122,6 @@ variable "critical_cluster_red_period" {
   default     = "300"
 }
 
-variable "critical_cluster_red_evaluation_periods" {
-  description = "Number of periods to compare against the threshold"
-  default     = "12"
-}
-
-variable "critical_cluster_red_period" {
-  description = "Period size for statistic to applied against"
-  default     = "300"
-}
-
 variable "cpu_utilization_evaluation_periods" {
   description = "Number of periods to compare against the opensearch cluster cpu utilization threshold."
   default     = "3"
