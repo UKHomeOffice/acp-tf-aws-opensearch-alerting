@@ -63,16 +63,16 @@ variable "write_throughput_threshold" {
   default     = "100"
 }
 
-variable "kinesis_put_records_evaluation_periods" {
-  description = "Number of periods to compare against the PutRecords.Success threshold."
+variable "kinesis_put_records_throttled_evaluation_periods" {
+  description = "Number of periods to compare against the PutRecords.ThrottledRecords threshold."
   default     = "3"
 }
-variable "kinesis_put_records_period" {
-  description = "Period that the statistic is applied against the PutRecords.Success metric."
+variable "kinesis_put_records_throttled_period" {
+  description = "Period that the statistic is applied against the PutRecords.Throttled metric."
   default     = "300"
 }
-variable "kinesis_put_records_threshold" {
-  description = "The PutRecords.Success threshold for the statistic to be compared against."
+variable "kinesis_put_records_throttled_threshold" {
+  description = "The PutRecords.Throttled threshold for the statistic to be compared against."
   default     = "100"
 }
 

@@ -83,16 +83,16 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "kinesis_put_record_success" {
+resource "aws_cloudwatch_metric_alarm" "kinesis_put_record_throttled" {
   count               = var.kinesis_alarms_required ? 1 : 0
-  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-put-record-success"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = var.kinesis_put_records_evaluation_periods
-  metric_name         = "PutRecords.Success"
+  alarm_name          = "${var.environment}-${var.kinesis_stream_name}-put-record-throttled"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = var.kinesis_put_records_throttled_evaluation_periods
+  metric_name         = "PutRecords.ThrottledRecords"
   namespace           = "AWS/Kinesis"
-  period              = var.kinesis_put_records_period
+  period              = var.kinesis_put_records_throttled_period
   statistic           = "Average"
-  threshold           = var.kinesis_put_records_threshold
+  threshold           = var.kinesis_put_records_throttled_threshold
   alarm_description   = "Some Putrecords are being rejected by Kinesis, likely too many records to be ingested, or a transient error. If this is a high number it could cause FluentD to stop pushing logs to Kinesis."
   alarm_actions       = var.alarm_actions
   dimensions = {
