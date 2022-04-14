@@ -24,12 +24,12 @@ variable "kinesis_stream_name" {
 
 variable "get_iterator_period" {
   description = "Period that the statistic is applied against the get iterator age metric."
-  default     = "300"
+  default     = "600"
 }
 
 variable "get_iterator_evaluation_periods" {
   description = "Number of periods to compare against the get iterator age threshold."
-  default     = "2"
+  default     = "3"
 }
 
 variable "get_iterator_threshold" {
@@ -60,7 +60,20 @@ variable "write_throughput_period" {
 }
 variable "write_throughput_threshold" {
   description = "The write throughput threshold for the statistic to be compared against."
-  default     = "0.5"
+  default     = "100"
+}
+
+variable "kinesis_put_records_throttled_evaluation_periods" {
+  description = "Number of periods to compare against the PutRecords.ThrottledRecords threshold."
+  default     = "3"
+}
+variable "kinesis_put_records_throttled_period" {
+  description = "Period that the statistic is applied against the PutRecords.Throttled metric."
+  default     = "300"
+}
+variable "kinesis_put_records_throttled_threshold" {
+  description = "The PutRecords.Throttled threshold for the statistic to be compared against."
+  default     = "100"
 }
 
 # Opensearch
@@ -98,7 +111,6 @@ variable "cluster_red_period" {
   description = "Period size for statistic to applied against"
   default     = "300"
 }
-
 
 variable "critical_cluster_red_evaluation_periods" {
   description = "Number of periods to compare against the threshold"
