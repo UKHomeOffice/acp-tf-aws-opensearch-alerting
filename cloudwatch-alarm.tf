@@ -8,7 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_records_success" {
   evaluation_periods  = var.get_records_success_evaluation_periods
   period              = var.get_records_success_period
   threshold           = var.get_records_success_threshold
-  alarm_description   = "GetRecords.Success has gone below the threshold value. This means some consumers of the stream are receiving errors, this will cause a backlog in the Opensearch cluster. Environment: ${var.environment}"
+  alarm_description   = "GetRecords.Success has gone below the threshold value. This means some consumers of the stream are receiving errors or aren't request at all, this will cause a backlog in the Opensearch cluster. Environment: ${var.environment}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -25,7 +25,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_put_records_success" {
   evaluation_periods  = var.put_records_success_evaluation_periods
   period              = var.put_records_success_period
   threshold           = var.put_records_success_threshold
-  alarm_description   = "Produers to the stream are receiving an error, if this is prolonged it will cause FluentD to go into a backoffloop and stop pushing to Kinesis. Environment: ${var.environment}"
+  alarm_description   = "Produers to the stream are receiving an error or not pushing at all, if this is prolonged it will cause FluentD to go into a backoffloop and stop pushing to Kinesis. Environment: ${var.environment}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -76,7 +76,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_write_throughput" {
   period              = var.write_throughput_period
   statistic           = "Average"
   threshold           = var.write_throughput_threshold
-  alarm_description   = "Kinesis stream has exceeded its write throughput and is blocking logs, if this is goes on for an extended amount of time or rejects a lot of logs it could cause FluentD to stop pushing to Kinesist could cause FluentD on Kubernetes nodes to stop.for_each = "
+  alarm_description   = "Kinesis stream has exceeded its write throughput and is blocking logs, if this is goes on for an extended amount of time or rejects a lot of logs it could cause FluentD to stop pushing to Kinesis and  could cause FluentD on Kubernetes nodes to stop and potential loss of logs. "
   alarm_actions       = var.alarm_actions
   dimensions = {
     StreamName = var.kinesis_stream_name
@@ -182,7 +182,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   period              = var.jvm_period
   statistic           = "Maximum"
   threshold           = var.jvm_threshold
-  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster jvm pressure is not above ${var.jvm_threshold}%"
+  alarm_description   = "AWS Opensearch cluster jvm pressure is above ${var.jvm_threshold}% in ${var.environment} environment for domain ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -200,7 +200,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   period              = var.master_cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.master_cpu_utilization_threshold
-  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_cpu_utilization_threshold}%"
+  alarm_description   = "AWS Opensearch cluster master nodes cpu utilization is consistently above ${var.master_cpu_utilization_threshold}%. ${var.environment} environment on domain ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
@@ -218,7 +218,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   period              = var.master_jvm_period
   statistic           = "Maximum"
   threshold           = var.master_jvm_threshold
-  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster cpu utilization is not consistently above ${var.master_jvm_threshold}%"
+  alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} "
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
