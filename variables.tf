@@ -183,7 +183,7 @@ variable "master_jvm_period" {
 }
 
 variable "unreachable_node_evaluation_periods" {
-  description = "Number of periods to compare against, the master jvm threshold."
+  description = "Number of periods to compare against"
   default     = "1"
 }
 
@@ -198,12 +198,12 @@ variable "unreachable_node_threshold" {
 }
 
 variable "blocking_writes_evaluation_periods" {
-  description = "Number of periods to compare against, the master jvm threshold."
+  description = "Number of periods to compare against"
   default     = "15"
 }
 
 variable "blocking_writes_period" {
-  description = "Period that the statistic is applied, against the opensearch cluster unreachable node threshold."
+  description = "Period that the statistic is applied"
   default     = "60"
 }
 
