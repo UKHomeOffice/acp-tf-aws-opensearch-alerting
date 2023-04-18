@@ -234,7 +234,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   metric_name         = "FreeStorageSpace"
   namespace           = "AWS/ES"
   period              = "60"
-  statistic           = "Average"
+  statistic           = "Minimum"
   threshold           = var.storage_percentage * lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
   alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
   alarm_actions       = var.alarm_actions
