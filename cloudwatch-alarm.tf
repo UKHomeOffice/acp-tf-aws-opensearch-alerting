@@ -164,7 +164,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   period              = var.cpu_utilization_period
   statistic           = "Maximum"
   threshold           = var.cpu_utilization_threshold
-  alarm_description   = "AWS Opensearch cluster cpu utilization is consistently above ${var.cpu_utilization_threshold}% for The ${var.environment} environment for ${var.opensearch_domain} domain. If consistently being triggered it could mean that cluster needs to be scaled up or have different nodes."
+  alarm_description   = "AWS Opensearch cluster cpu utilization is consistently above ${var.cpu_utilization_threshold}%"
   alarm_actions       = var.alarm_actions
   dimensions = {
     DomainName = var.opensearch_domain
