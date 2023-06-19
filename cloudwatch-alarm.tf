@@ -162,7 +162,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_alert" {
   metric_name         = "CPUUtilization"
   namespace           = "AWS/ES"
   period              = var.cpu_utilization_period
-  statistic           = "Maximum"
+  statistic           = "Average"
   threshold           = var.cpu_utilization_threshold
   alarm_actions       = var.alarm_actions
   dimensions = {
