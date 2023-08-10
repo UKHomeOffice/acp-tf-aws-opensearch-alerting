@@ -164,7 +164,7 @@ variable "master_cpu_utilization_period" {
 
 variable "master_cpu_utilization_threshold" {
   description = "The opensearch cluster dedicated master cpu utilization threshold."
-  default     = "50"
+  default     = "75"
 }
 
 variable "master_jvm_threshold" {
