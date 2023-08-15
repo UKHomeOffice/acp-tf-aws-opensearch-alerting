@@ -180,7 +180,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   metric_name         = "JVMMemoryPressure"
   namespace           = "AWS/ES"
   period              = var.jvm_period
-  statistic           = "Maximum"
+  statistic           = "Average"
   threshold           = var.jvm_threshold
   alarm_description   = "AWS Opensearch cluster jvm pressure is above ${var.jvm_threshold}% in ${var.environment} environment for domain ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
@@ -198,7 +198,7 @@ resource "aws_cloudwatch_metric_alarm" "master_cpu_utilization" {
   metric_name         = "MasterCPUUtilization"
   namespace           = "AWS/ES"
   period              = var.master_cpu_utilization_period
-  statistic           = "Maximum"
+  statistic           = "Average"
   threshold           = var.master_cpu_utilization_threshold
   alarm_description   = "AWS Opensearch cluster master nodes cpu utilization is consistently above ${var.master_cpu_utilization_threshold}%. ${var.environment} environment on domain ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
