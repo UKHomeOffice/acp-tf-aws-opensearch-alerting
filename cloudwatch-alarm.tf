@@ -179,7 +179,7 @@ resource "aws_cloudwatch_metric_alarm" "jvm_pressure" {
   metric_name         = "JVMMemoryPressure"
   namespace           = "AWS/ES"
   period              = var.jvm_period
-  statistic           = "Maximum"
+  statistic           = "Average"
   threshold           = var.jvm_threshold
   alarm_description   = "AWS Opensearch cluster jvm pressure is above ${var.jvm_threshold}% in ${var.environment} environment for domain ${var.opensearch_domain}"
   alarm_actions       = var.alarm_actions
@@ -215,7 +215,7 @@ resource "aws_cloudwatch_metric_alarm" "master_jvm_pressure" {
   metric_name         = "MasterJVMMemoryPressure"
   namespace           = "AWS/ES"
   period              = var.master_jvm_period
-  statistic           = "Maximum"
+  statistic           = "Average"
   threshold           = var.master_jvm_threshold
   alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} "
   alarm_actions       = var.alarm_actions
