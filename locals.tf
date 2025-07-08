@@ -3,7 +3,7 @@ locals {
     "i3.large.elasticsearch"   = 475000
     "i3.xlarge.elasticsearch"  = 950000
     "i3.2xlarge.elasticsearch" = 1900000
-    "i3.4xlarge.elasticsearch" = 4000000
+    "i3.4xlarge.elasticsearch" = 2000000
     "i3.8xlarge.elasticsearch" = 7600000
   }
 }
