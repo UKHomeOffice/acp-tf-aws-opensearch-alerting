@@ -152,6 +152,11 @@ variable "jvm_period" {
   default     = "900"
 }
 
+variable "jvm_statistic" {
+  description = "The statistic applied to the jvm pressure metric (e.g. Average, Maximum)."
+  default     = "Average"
+}
+
 variable "master_cpu_utilization_evaluation_periods" {
   description = "Number of periods to compare against, the master cpu utilization threshold."
   default     = "3"
@@ -180,6 +185,11 @@ variable "master_jvm_evaluation_periods" {
 variable "master_jvm_period" {
   description = "Period that the statistic is applied, against the dedicated master jvm threshold."
   default     = "900"
+}
+
+variable "master_jvm_statistic" {
+  description = "The statistic applied to the dedicated master jvm pressure metric (e.g. Average, Maximum)."
+  default     = "Average"
 }
 
 variable "unreachable_node_evaluation_periods" {
