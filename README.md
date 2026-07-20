@@ -51,6 +51,7 @@ No modules.
 | <a name="input_get_records_success_threshold"></a> [get\_records\_success\_threshold](#input\_get\_records\_success\_threshold) | Threshold for the get records success | `string` | `"0.5"` | no |
 | <a name="input_jvm_evaluation_periods"></a> [jvm\_evaluation\_periods](#input\_jvm\_evaluation\_periods) | Number of periods to compare against the jvm threshold. | `string` | `"3"` | no |
 | <a name="input_jvm_period"></a> [jvm\_period](#input\_jvm\_period) | Period that the statistic is applied against the jvm threshold. | `string` | `"900"` | no |
+| <a name="input_jvm_statistic"></a> [jvm\_statistic](#input\_jvm\_statistic) | The statistic applied to the jvm pressure metric (e.g. Average, Maximum). | `string` | `"Average"` | no |
 | <a name="input_jvm_threshold"></a> [jvm\_threshold](#input\_jvm\_threshold) | The opensearch cluster jvm pressure threshold. | `string` | `"85"` | no |
 | <a name="input_kinesis_alarms_required"></a> [kinesis\_alarms\_required](#input\_kinesis\_alarms\_required) | Boolean to determine if kinesis alarms are required. | `bool` | `false` | no |
 | <a name="input_kinesis_stream_name"></a> [kinesis\_stream\_name](#input\_kinesis\_stream\_name) | Name of the kinesis stream to monitor. | `string` | `"acp-log-stream"` | no |
@@ -59,6 +60,7 @@ No modules.
 | <a name="input_master_cpu_utilization_threshold"></a> [master\_cpu\_utilization\_threshold](#input\_master\_cpu\_utilization\_threshold) | The opensearch cluster dedicated master cpu utilization threshold. | `string` | `"50"` | no |
 | <a name="input_master_jvm_evaluation_periods"></a> [master\_jvm\_evaluation\_periods](#input\_master\_jvm\_evaluation\_periods) | Number of periods to compare against, the master jvm threshold. | `string` | `"3"` | no |
 | <a name="input_master_jvm_period"></a> [master\_jvm\_period](#input\_master\_jvm\_period) | Period that the statistic is applied, against the dedicated master jvm threshold. | `string` | `"900"` | no |
+| <a name="input_master_jvm_statistic"></a> [master\_jvm\_statistic](#input\_master\_jvm\_statistic) | The statistic applied to the dedicated master jvm pressure metric (e.g. Average, Maximum). | `string` | `"Average"` | no |
 | <a name="input_master_jvm_threshold"></a> [master\_jvm\_threshold](#input\_master\_jvm\_threshold) | The opensearch cluster dedicated master jvm pressure threshold. | `string` | `"80"` | no |
 | <a name="input_opensearch_alarms_required"></a> [opensearch\_alarms\_required](#input\_opensearch\_alarms\_required) | Boolean to determine if opensearch cloudwatch alarms are required. | `bool` | `false` | no |
 | <a name="input_opensearch_domain"></a> [opensearch\_domain](#input\_opensearch\_domain) | The opensearch domain that these alarms are required for. | `string` | `""` | no |
