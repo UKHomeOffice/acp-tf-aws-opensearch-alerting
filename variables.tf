@@ -12,6 +12,28 @@ variable "critical_alarm_actions" {
   default     = []
 }
 
+variable "email_alarm_actions" {
+  description = "Additional actions (e.g. an email SNS topic) for the alarms that indicate ingestion has stopped or is at risk: storage space, index writes blocked, critical cluster red, kinesis iterator age and indexing rate."
+  type        = list(string)
+  default     = []
+}
+
+variable "indexing_rate_threshold" {
+  description = "Alarm when the opensearch IndexingRate average falls below this value. Set to 0 to disable the alarm."
+  type        = number
+  default     = 0
+}
+
+variable "indexing_rate_period" {
+  description = "Period that the statistic is applied against the indexing rate threshold."
+  default     = "300"
+}
+
+variable "indexing_rate_evaluation_periods" {
+  description = "Number of periods to compare against the indexing rate threshold."
+  default     = "3"
+}
+
 # Kinesis
 variable "kinesis_alarms_required" {
   description = "Boolean to determine if kinesis alarms are required."

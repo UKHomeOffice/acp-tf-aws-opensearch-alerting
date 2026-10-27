@@ -43,7 +43,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_get_iterator_age" {
   statistic           = "Average"
   threshold           = var.get_iterator_threshold
   alarm_description   = "The oldest record requested from Kinesis has reached the threshold value of ${var.get_iterator_threshold} milliseconds. This means there will be no logs in Opensearch younger than this time, this could mean that there is a large influx or logs - or if this metric keeps increasing Logstash has stopped ingesting. ${var.environment} environment"
-  alarm_actions       = var.alarm_actions
+  alarm_actions       = local.alarm_actions_with_email
   dimensions = {
     StreamName = var.kinesis_stream_name
   }
@@ -147,7 +147,7 @@ resource "aws_cloudwatch_metric_alarm" "critical_cluster_red" {
   statistic           = "Minimum"
   threshold           = "1"
   alarm_description   = "The ${var.environment} environment critical alarm to monitor the AWS Opensearch cluster status is red for ${var.opensearch_domain}. This means at least one of the indexes doesn't have a primary replica, this could mean data loss of an index or an index is unable to schedule a primary shard which would stop writes."
-  alarm_actions       = var.critical_alarm_actions
+  alarm_actions       = local.critical_alarm_actions_with_email
   dimensions = {
     DomainName = var.opensearch_domain
     ClientId   = data.aws_caller_identity.current.account_id
@@ -236,7 +236,7 @@ resource "aws_cloudwatch_metric_alarm" "storage_space" {
   statistic           = "Minimum"
   threshold           = var.storage_percentage * lookup(local.instance_types, var.opensearch_instance, "i3.large.elasticsearch")
   alarm_description   = "The ${var.environment} environment alarm to monitor the ${var.opensearch_domain} AWS Opensearch cluster storage space available"
-  alarm_actions       = var.alarm_actions
+  alarm_actions       = local.alarm_actions_with_email
   dimensions = {
     DomainName = var.opensearch_domain
     ClientId   = data.aws_caller_identity.current.account_id
@@ -272,7 +272,26 @@ resource "aws_cloudwatch_metric_alarm" "blocking_writes" {
   statistic           = "Maximum"
   threshold           = "1"
   alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch is blocking incoming write requests. Some common factors include the following: FreeStorageSpace is too low or JVMMemoryPressure is too high. To alleviate this issue, consider adding more disk space or scaling your cluster."
-  alarm_actions       = var.alarm_actions
+  alarm_actions       = local.alarm_actions_with_email
+  dimensions = {
+    DomainName = var.opensearch_domain
+    ClientId   = data.aws_caller_identity.current.account_id
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "indexing_rate_low" {
+  count               = var.opensearch_alarms_required && var.indexing_rate_threshold > 0 ? 1 : 0
+  alarm_name          = "${var.environment}-${var.opensearch_domain}-opensearch-indexing-rate-low"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = var.indexing_rate_evaluation_periods
+  metric_name         = "IndexingRate"
+  namespace           = "AWS/ES"
+  period              = var.indexing_rate_period
+  statistic           = "Average"
+  threshold           = var.indexing_rate_threshold
+  treat_missing_data  = "breaching"
+  alarm_description   = "The ${var.environment} environment alarm to monitor if the ${var.opensearch_domain} AWS Opensearch indexing rate has dropped below ${var.indexing_rate_threshold}. This usually means ingestion has stopped (e.g. cluster red, writes blocked or Logstash stuck) and logs are backing up in Kinesis."
+  alarm_actions       = local.alarm_actions_with_email
   dimensions = {
     DomainName = var.opensearch_domain
     ClientId   = data.aws_caller_identity.current.account_id
